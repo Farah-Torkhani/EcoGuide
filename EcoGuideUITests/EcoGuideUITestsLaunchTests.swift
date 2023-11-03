@@ -1,4 +1,3 @@
-
 //
 //  EcoGuideUITestsLaunchTests.swift
 //  EcoGuideUITests
