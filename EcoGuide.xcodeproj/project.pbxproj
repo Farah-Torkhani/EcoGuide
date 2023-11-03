@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		110110092AF5A96900923C93 /* listview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110110082AF5A96900923C93 /* listview.swift */; };
 		117425F62AF5832700ED219E /* EcoGuideApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117425F52AF5832700ED219E /* EcoGuideApp.swift */; };
 		117425F82AF5832700ED219E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117425F72AF5832700ED219E /* ContentView.swift */; };
 		117425FA2AF5832700ED219E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 117425F92AF5832700ED219E /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		110110082AF5A96900923C93 /* listview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = listview.swift; sourceTree = "<group>"; };
 		117425F22AF5832700ED219E /* EcoGuide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		117425F52AF5832700ED219E /* EcoGuideApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoGuideApp.swift; sourceTree = "<group>"; };
 		117425F72AF5832700ED219E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				117425FE2AF5832700ED219E /* Persistence.swift */,
 				117426002AF5832700ED219E /* EcoGuide.xcdatamodeld */,
 				117425FB2AF5832700ED219E /* Preview Content */,
+				110110082AF5A96900923C93 /* listview.swift */,
 			);
 			path = EcoGuide;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				110110092AF5A96900923C93 /* listview.swift in Sources */,
 				117425FF2AF5832700ED219E /* Persistence.swift in Sources */,
 				117425F82AF5832700ED219E /* ContentView.swift in Sources */,
 				117426022AF5832700ED219E /* EcoGuide.xcdatamodeld in Sources */,
