@@ -1,124 +1,183 @@
-//
-//  listview.swift
-//  EcoGuide
-//
-//  Created by Torkhani fara on 3/11/2023.
-//
-
 import SwiftUI
 
-struct listview: View {
+struct ImageInfo: Identifiable {
+    let id = UUID()
+    let imageName: String
+    let title: String
+    let location: String
+    let price: String
+}
+
+struct HomeView: View {
     @State private var username: String = ""
-    var image = ["guide1","guide2","guide3"]
-    var body: some View {
+    var image = ["guide1", "guide2", "guide3"]
+    @State private var imageInfoList: [ImageInfo] = [
+        ImageInfo(imageName: "guide1", title: "Flen Fouleni", location: "tunis, France", price: "$29 / day"),
+        ImageInfo(imageName: "guide2", title: "Flen Fouleni", location: "Paris, France", price: "$29 / day"),
+        ImageInfo(imageName: "guide3", title: "Flen Fouleni", location: "Paris, France", price: "$29 / day"),// Add more image info items for each image
+    ]
     
-                ZStack {
-                    VStack(alignment: .leading, spacing: 40)
-                    {
-                        Text("Hello, User")
-                        TextField(
-                            "Search",
-                            text: $username
-                        ).padding()
-                        .textFieldStyle(CustomTextFieldStyle())
+    
+    @State private var selectedFilter = "Recommended"
+
+        let filters = ["Recommended", "Popular", "Trending", "Testing"]
+    var body: some View {
+       
+        ScrollView {
+            ZStack {
+                VStack(alignment: .leading, spacing: 40)
+                { HStack() {
+                    Image("logo1").resizable().frame(width: 60, height: 60) // Ajustez la taille selon vos besoins
+                        Text("Hello, User!").font(.title)
+                                           
+                                    }
+                   
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .padding(.leading, 10)
+                 
                         
-                        ScrollView(.horizontal, showsIndicators: false) {
-                                            HStack(spacing: 10) {
-                                                ForEach(image,id: \.self)
-                                                { image in Image(image).resizable().cornerRadius(50)
-                                                   // RoundedRectangle(cornerRadius: 40) // Container with border radius
-                                                   // Image(image).resizable().scaledToFit()
-                                                        .frame(width: 250,height: 350) // Adjust the width as needed
-                                                        .overlay(
-                                                            TextField(
-                                                                "guide image",
-                                                                text: $username
-                                                            )
-                                                            .textFieldStyle(CustomTextFieldStyle())
-                                                            .padding()
-                                                        )}
-                                                
-                                             
-                                                
-                            
-                                   
-                                            }
-                        }.padding()
-                        
-                        ScrollView(.vertical, showsIndicators: true) {
-                            RoundedRectangle(cornerRadius: 40)
-                                
-                                .fill(Color.blue)
-                                .frame(width: 350, height: 100) // Adjust the height as needed
-                                .overlay(
-                                    TextField(
-                                        "User name (email address)",
-                                        text: $username
-                                    )
-                                    .textFieldStyle(CustomTextFieldStyle())
+                        TextField("Rechercher...", text: $username)
+                            .padding(.vertical, 10)
+                            .padding(.trailing, 10)
+                    }
+                    .textFieldStyle(CustomTextFieldStyle()).cornerRadius(10)
                                     .padding()
-                                )
-                                .padding()
-                            RoundedRectangle(cornerRadius: 40)
-                                
-                                .fill(Color.blue)
-                                .frame(width: 350, height: 100) // Adjust the height as needed
-                                .overlay(
-                                    TextField(
-                                        "User name (email address)",
-                                        text: $username
-                                    )
-                                    .textFieldStyle(CustomTextFieldStyle())
-                                    .padding()
-                                )
-                                .padding()
-                            RoundedRectangle(cornerRadius: 40)
-                                
-                                .fill(Color.blue)
-                                .frame(width: 350, height: 100) // Adjust the height as needed
-                                .overlay(
-                                    TextField(
-                                        "User name (email address)",
-                                        text: $username
-                                    )
-                                    .textFieldStyle(CustomTextFieldStyle())
-                                    .padding()
-                                )
-                                .padding()
-                            RoundedRectangle(cornerRadius: 40)
-                                
-                                .fill(Color.blue)
-                                .frame(width: 350, height: 100) // Adjust the height as needed
-                                .overlay(
-                                    TextField(
-                                        "User name (email address)",
-                                        text: $username
-                                    )
-                                    .textFieldStyle(CustomTextFieldStyle())
-                                    .padding()
-                                )
-                                .padding()
+                  
+                    
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(filters, id: \.self) { filter in
+                                Button(action: {
+                                    selectedFilter = filter
+                                }) {
+                                    Text(filter)
+                                        .foregroundColor(selectedFilter == filter ? .white : .blue)
+                                        .padding(EdgeInsets(top: 12, leading: 25, bottom: 12, trailing: 25))
+                                        .background(selectedFilter == filter ? Color.blue : Color.clear)
+                                        .cornerRadius(32)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 30)
+                                                .stroke(selectedFilter == filter ? Color.blue : Color.blue, lineWidth: 2)
+                                        )
+                                }
+                            }
                         }
-                        
                     }
                     
-                }
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            ForEach(imageInfoList) { imageInfo in
+                                VStack {
+                                    ZStack(alignment: .bottomLeading) {
+                                        Image(imageInfo.imageName)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 300, height: 300)
+                                            .cornerRadius(50)
+                                        
+                                        
+                                        VStack(alignment: .leading, spacing: 10) {
+                                            Text(imageInfo.title)
+                                                .font(.headline)
+                                                .foregroundColor(.white)
+                                            Text(imageInfo.location)
+                                                .font(.headline)
+                                                .foregroundColor(.black)
+                                            Text(imageInfo.price)
+                                                .font(.headline)
+                                                .foregroundColor(.white)
+                                        }
+                                        .padding()
+                                    }
+                                    .frame(width: 300, height: 300)
+                                }
+                            }
+                        }
+                    }
+                    
+                    HStack {
+                        Text("Recently Booked")
+                            .font(.system(size: 22, weight: .semibold))
+                        Spacer()
+                        Text("See all")
+                            .font(.system(size: 22, weight: .semibold))
+                            .foregroundColor(Color.blue)
+                    }.padding(.trailing, 20)
+                    
+                        ForEach(imageInfoList) { imageInfo in
+                            ZStack {
+                                Color(hex: "F3F8FE") // Set your desired background color here
+                                    .frame(width: 350, height: 150)
+                                    .cornerRadius(20)
+                                HStack(spacing: 5) {
+                                    Image(imageInfo.imageName)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 100, height: 100)
+                                    VStack(alignment: .leading, spacing: 15) {
+                                        Text(imageInfo.title)
+                                            .font(.system(size: 23, weight: .semibold))
+                                        Text(imageInfo.location)
+                                            .font(.system(size: 16))
+                                            .foregroundColor(Color.gray)
+                                        Text("4.8 (4209 reviews)")
+                                            .font(.system(size: 15))
+                                    }
+                                    .frame(maxWidth: .infinity) // Expand to fill the available space
+                                    Spacer()
+                                    VStack(alignment: .trailing, spacing: 15) {
+                                        Text("$35")
+                                            .font(.system(size: 23, weight: .semibold))
+                                            .foregroundColor(Color.blue)
+                                        Text("/ day")
+                                        Text("Button")
+                                        
+                                    }
+                                }
+                                .padding(EdgeInsets(top: 0, leading: 15, bottom: 0, trailing: 15))
+                            }
+                        
+                        }.padding(.trailing, 20)
+                    
+                }.padding(.leading, 20)
                 
             }
         }
+        
+    }
+}
 
-        struct CustomTextFieldStyle: TextFieldStyle {
-            func _body(configuration: TextField<Self._Label>) -> some View {
-                configuration
-                    .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
-                    .background(RoundedRectangle(cornerRadius: 10).fill(Color.blue))
-                    .foregroundColor(Color.red)
-            }
-        }
-  
+struct CustomTextFieldStyle: TextFieldStyle {
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
+            .padding(EdgeInsets(top: 15, leading: 10, bottom: 15, trailing: 10))
+            .background(
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color(hex: "F3F8FE")) // Use an extension to create a Color from a hex string
+                        )
+            .foregroundColor(Color.black)
+    }
+}
 
-struct listview_Previews: PreviewProvider {
+extension Color {
+    init(hex: String) {
+        let scanner = Scanner(string: hex)
+        var rgb: UInt64 = 0
+
+        scanner.scanHexInt64(&rgb)
+
+        let red = Double((rgb & 0xFF0000) >> 16) / 255.0
+        let green = Double((rgb & 0x00FF00) >> 8) / 255.0
+        let blue = Double(rgb & 0x0000FF) / 255.0
+
+        self.init(red: red, green: green, blue: blue)
+    }
+}
+
+struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        listview()
+        HomeView()
     }
 }
