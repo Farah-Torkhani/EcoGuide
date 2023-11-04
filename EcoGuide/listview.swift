@@ -9,6 +9,7 @@ import SwiftUI
 
 struct listview: View {
     @State private var username: String = ""
+    var image = ["guide1","guide2","guide3"]
     var body: some View {
     
                 ZStack {
@@ -20,58 +21,27 @@ struct listview: View {
                             text: $username
                         ).padding()
                         .textFieldStyle(CustomTextFieldStyle())
-                    
+                        
                         ScrollView(.horizontal, showsIndicators: false) {
                                             HStack(spacing: 10) {
-                                                RoundedRectangle(cornerRadius: 40) // Container with border radius
-                                                    .fill(Color.blue)
-                                                    .frame(width: 250) // Adjust the width as needed
-                                                    .overlay(
-                                                        TextField(
-                                                            "guide image",
-                                                            text: $username
-                                                        )
-                                                        .textFieldStyle(CustomTextFieldStyle())
-                                                        .padding()
-                                                    )
+                                                ForEach(image,id: \.self)
+                                                { image in Image(image).resizable().cornerRadius(50)
+                                                   // RoundedRectangle(cornerRadius: 40) // Container with border radius
+                                                   // Image(image).resizable().scaledToFit()
+                                                        .frame(width: 250,height: 350) // Adjust the width as needed
+                                                        .overlay(
+                                                            TextField(
+                                                                "guide image",
+                                                                text: $username
+                                                            )
+                                                            .textFieldStyle(CustomTextFieldStyle())
+                                                            .padding()
+                                                        )}
                                                 
-                                                RoundedRectangle(cornerRadius: 40) // Container with border radius
-                                                    .fill(Color.blue)
-                                                    .frame(width: 250) // Adjust the width as needed
-                                                    .overlay(
-                                                        TextField(
-                                                            "User name (email address)",
-                                                            text: $username
-                                                        )
-                                                        .textFieldStyle(CustomTextFieldStyle())
-                                                        .padding()
-                                                    )
+                                             
                                                 
-                                                RoundedRectangle(cornerRadius: 40) // Container with border radius
-                                                    .fill(Color.blue)
-                                                    .frame(width: 250) // Adjust the width as needed
-                                                    .overlay(
-                                                        TextField(
-                                                            "User name (email address)",
-                                                            text: $username
-                                                        )
-                                                        .textFieldStyle(CustomTextFieldStyle())
-                                                        .padding()
-                                                    )
-                                                
-                                                RoundedRectangle(cornerRadius: 10) // Container with border radius
-                                                    .fill(Color.blue)
-                                                    .frame(width: 250) // Adjust the width as needed
-                                                    .overlay(
-                                                        TextField(
-                                                            "guide image view",
-                                                            text: $username
-                                                        )
-                                                        .textFieldStyle(CustomTextFieldStyle())
-                                                        .padding()
-                                                    )
-                                                
-                                                // Add more containers as needed
+                            
+                                   
                                             }
                         }.padding()
                         
