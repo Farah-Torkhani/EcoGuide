@@ -91,7 +91,7 @@ struct listview: View {
                                 .frame(width: 350, height: 100) // Adjust the height as needed
                                 .overlay(
                                     TextField(
-                                        "User name (email addresss)",
+                                        "User name (email address)",
                                         text: $username
                                     )
                                     .textFieldStyle(CustomTextFieldStyle())
