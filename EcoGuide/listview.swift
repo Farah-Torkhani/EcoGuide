@@ -6,18 +6,17 @@ struct ImageInfo: Identifiable {
     let title: String
     let location: String
     let price: String
+    let rating: String
 }
 
 struct HomeView: View {
     @State private var username: String = ""
     var image = ["guide1", "guide2", "guide3"]
     @State private var imageInfoList: [ImageInfo] = [
-        ImageInfo(imageName: "guide1", title: "Flen Fouleni", location: "tunis, France", price: "$29 / day"),
-        ImageInfo(imageName: "guide2", title: "Flen Fouleni", location: "Paris, France", price: "$29 / day"),
-        ImageInfo(imageName: "guide3", title: "Flen Fouleni", location: "Paris, France", price: "$29 / day"),// Add more image info items for each image
-    ]
-    
-    
+        ImageInfo(imageName: "guide1", title: "Flen Fouleni", location: "tunis, France", price: "$29 / day", rating: "String"),
+        ImageInfo(imageName: "guide2", title: "Flen Fouleni", location: "Paris, France", price: "$29 / day", rating: "string"),
+        ImageInfo(imageName: "guide3", title: "Flen Fouleni", location: "Paris, France", price: "$29 / day", rating: "string"),// Add more image info items for each image
+     ]
     @State private var selectedFilter = "Recommended"
 
         let filters = ["Recommended", "Popular", "Trending", "Testing"]
@@ -25,25 +24,28 @@ struct HomeView: View {
        
         ScrollView {
             ZStack {
+            
                 VStack(alignment: .leading, spacing: 40)
                 { HStack() {
                     Image("logo1").resizable().frame(width: 60, height: 60) // Ajustez la taille selon vos besoins
                         Text("Hello, User!").font(.title)
                                            
                                     }
-                   
                     HStack {
-                        Image(systemName: "magnifyingglass")
-                            .padding(.leading, 10)
-                 
-                        
                         TextField("Rechercher...", text: $username)
                             .padding(.vertical, 10)
                             .padding(.trailing, 10)
+                            .overlay(
+                                HStack {
+                                    Spacer()
+                                    Image(systemName: "magnifyingglass")
+                                        .padding(.trailing, 10)
+                                }
+                            )
                     }
-                    .textFieldStyle(CustomTextFieldStyle()).cornerRadius(10)
-                                    .padding()
-                  
+                    .textFieldStyle(CustomTextFieldStyle())
+                    .cornerRadius(10)
+                    .padding()
                     
                     
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -67,35 +69,48 @@ struct HomeView: View {
                     }
                     
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 10) {
-                            ForEach(imageInfoList) { imageInfo in
-                                VStack {
-                                    ZStack(alignment: .bottomLeading) {
-                                        Image(imageInfo.imageName)
-                                            .resizable()
-                                            .scaledToFill()
-                                            .frame(width: 300, height: 300)
-                                            .cornerRadius(50)
-                                        
-                                        
-                                        VStack(alignment: .leading, spacing: 10) {
-                                            Text(imageInfo.title)
-                                                .font(.headline)
-                                                .foregroundColor(.white)
-                                            Text(imageInfo.location)
-                                                .font(.headline)
-                                                .foregroundColor(.black)
-                                            Text(imageInfo.price)
-                                                .font(.headline)
-                                                .foregroundColor(.white)
-                                        }
-                                        .padding()
-                                    }
-                                    .frame(width: 300, height: 300)
-                                }
-                            }
-                        }
-                    }
+                                          HStack(spacing: 10) {
+                                              ForEach(imageInfoList) { imageInfo in
+                                                  VStack {
+                                                      ZStack {
+                                                          Image(imageInfo.imageName)
+                                                              .resizable()
+                                                              .frame(width: 300, height: 300)
+                                                              .cornerRadius(50)
+                                                        
+                                                         
+                                                          HStack {
+                                                              Spacer()
+                                                              Text(imageInfo.rating)
+                                                                  .font(.headline)
+                                                                  .foregroundColor(.white)
+                                                              Image(systemName: "star.fill")
+                                                                  .foregroundColor(.yellow)
+                                                         
+
+                                                              
+                                                      }
+                                                     
+                                                          
+                                                          VStack(alignment: .leading, spacing: 10) {
+                                                              Spacer()
+                                                              Text(imageInfo.title)
+                                                                  .font(.headline)
+                                                                  .foregroundColor(.white)
+                                                              Text(imageInfo.location)
+                                                                  .font(.headline)
+                                                                  .foregroundColor(.black)
+                                                              Text(imageInfo.price)
+                                                                  .font(.headline)
+                                                                  .foregroundColor(.white)
+                                                          }
+                                                          .padding()
+                                                      }
+                                                      .frame(width: 300, height: 300)
+                                                  }
+                                              }
+                                          }
+                }
                     
                     HStack {
                         Text("Recently Booked")
@@ -122,8 +137,12 @@ struct HomeView: View {
                                         Text(imageInfo.location)
                                             .font(.system(size: 16))
                                             .foregroundColor(Color.gray)
-                                        Text("4.8 (4209 reviews)")
-                                            .font(.system(size: 15))
+                                        
+                                        HStack{
+                                            Image(systemName: "star.fill")
+                                                .foregroundColor(.yellow)
+                                            Text("4.8 (4209 reviews)")
+                                            .font(.system(size: 15))}
                                     }
                                     .frame(maxWidth: .infinity) // Expand to fill the available space
                                     Spacer()
@@ -132,7 +151,9 @@ struct HomeView: View {
                                             .font(.system(size: 23, weight: .semibold))
                                             .foregroundColor(Color.blue)
                                         Text("/ day")
-                                        Text("Button")
+                                        Image(systemName: "bookmark")
+                                            .font(.system(size: 24))
+                                            .foregroundColor(Color.black) //
                                         
                                     }
                                 }
