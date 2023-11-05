@@ -31,19 +31,21 @@ struct HomeView: View {
                         Text("Hello, User!").font(.title)
                                            
                                     }
-                   
                     HStack {
-                        Image(systemName: "magnifyingglass")
-                            .padding(.leading, 10)
-                 
-                        
                         TextField("Rechercher...", text: $username)
                             .padding(.vertical, 10)
                             .padding(.trailing, 10)
+                            .overlay(
+                                HStack {
+                                    Spacer()
+                                    Image(systemName: "magnifyingglass")
+                                        .padding(.trailing, 10)
+                                }
+                            )
                     }
-                    .textFieldStyle(CustomTextFieldStyle()).cornerRadius(10)
-                                    .padding()
-                  
+                    .textFieldStyle(CustomTextFieldStyle())
+                    .cornerRadius(10)
+                    .padding()
                     
                     
                     ScrollView(.horizontal, showsIndicators: false) {
@@ -73,7 +75,6 @@ struct HomeView: View {
                                                       ZStack {
                                                           Image(imageInfo.imageName)
                                                               .resizable()
-                                                              .scaledToFill()
                                                               .frame(width: 300, height: 300)
                                                               .cornerRadius(50)
                                                         
@@ -136,8 +137,12 @@ struct HomeView: View {
                                         Text(imageInfo.location)
                                             .font(.system(size: 16))
                                             .foregroundColor(Color.gray)
-                                        Text("4.8 (4209 reviews)")
-                                            .font(.system(size: 15))
+                                        
+                                        HStack{
+                                            Image(systemName: "star.fill")
+                                                .foregroundColor(.yellow)
+                                            Text("4.8 (4209 reviews)")
+                                            .font(.system(size: 15))}
                                     }
                                     .frame(maxWidth: .infinity) // Expand to fill the available space
                                     Spacer()
@@ -146,7 +151,9 @@ struct HomeView: View {
                                             .font(.system(size: 23, weight: .semibold))
                                             .foregroundColor(Color.blue)
                                         Text("/ day")
-                                        Text("Button")
+                                        Image(systemName: "bookmark")
+                                            .font(.system(size: 24))
+                                            .foregroundColor(Color.black) //
                                         
                                     }
                                 }

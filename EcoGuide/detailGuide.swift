@@ -1,6 +1,12 @@
-import SwiftUI
+//
+//  DetailGuide.swift
+//  EcoGuide
+//
+//  Created by Torkhani fara on 5/11/2023.
+//
 
-struct GuideInfo {
+import SwiftUI
+struct GuideInfo1 {
     var name: String
     var location: String
     var imageName: String
@@ -10,10 +16,11 @@ struct GuideInfo {
     var price: String
 }
 
-struct DetailView: View {
-    var guideInfo: GuideInfo
-
+struct DetailGuide1: View {
+    
+    var guideInfo: GuideInfo1
     var body: some View {
+        
         ScrollView {
             VStack(alignment:.leading,spacing: 20) {
                 // Image en haut de la page
@@ -130,9 +137,9 @@ struct DetailView: View {
     }
 
 
-struct DetailView_Previews: PreviewProvider {
+struct DetailGuide_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(guideInfo: GuideInfo(
+        DetailGuide1(guideInfo: GuideInfo1(
             name: "Flena Foueniya",
             location: "Paris, France",
             imageName: "guide_image",
